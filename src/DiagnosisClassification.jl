@@ -1,5 +1,5 @@
 module DiagnosisClassification
 
-# Write your package code here.
+_hello_world() = "Hello world!"
 
-end
+end # module
