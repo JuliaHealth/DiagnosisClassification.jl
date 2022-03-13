@@ -2,5 +2,5 @@ using DiagnosisClassification
 using Test
 
 @testset "DiagnosisClassification.jl" begin
-    # Write your tests here.
+    @test DiagnosisClassification._hello_world() == "Hello world!"
 end
