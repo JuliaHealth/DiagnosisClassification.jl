@@ -26,7 +26,7 @@ function setindex_same_value!(
 
     old_value = dict[key]
     new_value_converted = convert(V, new_value)::V
-    if old_value !== new_value # we require egality
+    if old_value !== new_value_converted # we require egality
         msg = "Duplicate key found"
         @error msg key old_value new_value new_value_converted
         throw(ErrorException(msg))
