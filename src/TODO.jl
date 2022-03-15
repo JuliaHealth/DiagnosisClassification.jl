@@ -4,7 +4,7 @@ function generate_ccs9_to_icd9(download_cache = ensure_downloaded_files())
     elements = strip.(split(ccs_filecontents, "\n\n"))
     ccs9_to_icd9            = Dict{DiagnosisClass, Set{DiagnosisClass}}()
     ccs9_to_ccs_description = Dict{DiagnosisClass, String}()
-    ProgressMeter.@showprogress for element in elements
+    for element in elements
         if startswith(element, "Appendix A - ")
             continue
         end
@@ -61,7 +61,7 @@ function generate_ccs10_to_icd10(download_cache = ensure_downloaded_files())
 
     ccs10_to_icd10           = Dict{DiagnosisClass, Set{DiagnosisClass}}()
     ccs10_to_ccs_description = Dict{DiagnosisClass, String}()
-    ProgressMeter.@showprogress for row in ccs_file
+    for row in ccs_file
         icd_value = remove_single_quotes(row[Symbol("'ICD-10-CM CODE'")])
         icd_node  = construct_icd10(icd_value)
         for ccscolname in ccs_column_names_str
