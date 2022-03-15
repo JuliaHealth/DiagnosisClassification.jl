@@ -3,6 +3,7 @@ module DiagnosisClassification
 import CSV
 import Downloads
 import Pkg
+import ProgressMeter
 import Scratch
 import TOML
 
