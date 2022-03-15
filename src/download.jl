@@ -1,14 +1,10 @@
-function _get_download_cache()
-    global download_cache
-    return download_cache::String
-end
-
 function ensure_downloaded_files()
-    download_cache = _get_download_cache()
+    global download_cache
+    download_cache::String
     if isempty(readdir(download_cache))
         force_download_files(download_cache)
     end
-    return download_cache
+    return download_cache::String
 end
 
 function force_download_files(dest_directory::AbstractString)
