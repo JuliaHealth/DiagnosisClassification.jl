@@ -13,7 +13,7 @@ end
 
 function force_download_files(dest_directory::AbstractString)
     let url = "https://www.hcup-us.ahrq.gov/toolssoftware/ccs/AppendixASingleDX.txt"
-        @info "Downloading files for ICD9 to CCS9"
+        @info "Downloading files for CCS9"
         sleep(3) # Sleep for a bit, so that we can be compliant with any rate limits
         src = Downloads.download(url)
         dest_filename = "ccs9.txt"
@@ -24,7 +24,7 @@ function force_download_files(dest_directory::AbstractString)
         mv(src, dest; force = true)
     end
     let url = "https://www.hcup-us.ahrq.gov/toolssoftware/ccsr/DXCCSR_v2022-1.zip"
-        @info "Downloading files for ICD10 to CCS10"
+        @info "Downloading files for CCS10"
         sleep(3) # Sleep for a bit, so that we can be compliant with any rate limits
         downloaded_filename = Downloads.download(url)
         dest_filename = "ccs10.csv"
