@@ -37,6 +37,7 @@ function force_download_files(dest_directory::AbstractString)
             mv(src, dest)
         end
     end
+    return nothing
 end
 
 function _extract_zip_file(
