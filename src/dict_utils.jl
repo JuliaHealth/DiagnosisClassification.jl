@@ -20,12 +20,11 @@ function setindex_same_value!(
     ) where {K, V}
     if haskey(dict, key)
         old_value = dict[key]
-        if old_value != new_value
+        if !isequal(old_value, new_value) || (old_value !== new_value) || (old_value != new_value)
             msg = "Duplicate key found"
             @error msg key old_value new_value
             throw(ErrorException(msg))
         end
     end
-    dict[key] = new_value
     return nothing
 end
