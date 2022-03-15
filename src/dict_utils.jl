@@ -3,14 +3,15 @@ function setindex_no_overwrite!(
         key::K,
         new_value,
     ) where {K, V}
-    if haskey(dict, key)
-        old_value = dict[key]
-        msg = "Duplicate key found"
-        @error msg key old_value new_value
-        throw(ErrorException(msg))
+    if !haskey(dict, key)
+        dict[key] = new_value
+        return nothing
     end
-    dict[key] = new_value
-    return nothing
+
+    old_value = dict[key]
+    msg = "Duplicate key found"
+    @error msg key old_value new_value
+    throw(ErrorException(msg))
 end
 
 function setindex_same_value!(
@@ -18,14 +19,17 @@ function setindex_same_value!(
         key::K,
         new_value,
     ) where {K, V}
-    if haskey(dict, key)
-        old_value = dict[key]
-        if old_value != new_value
-            msg = "Duplicate key found"
-            @error msg key old_value new_value
-            throw(ErrorException(msg))
-        end
+    if !haskey(dict, key)
+        dict[key] = new_value
+        return nothing
     end
-    dict[key] = new_value
+
+    old_value = dict[key]
+    if old_value !== new_value # we require egality
+        msg = "Duplicate key found"
+        @error msg key old_value new_value
+        throw(ErrorException(msg))
+    end
+
     return nothing
 end
