@@ -57,11 +57,7 @@ function generate_ccs10_to_icd10(download_cache = ensure_downloaded_files())
     ccscolname_to_ccsdesccolname = x -> begin
         return "'" * remove_single_quotes(x) * " DESCRIPTION'"
     end
-    if length(ccs_column_names_str) < 1
-        msg = "Not enough CCS category columns"
-        @error msg ccs_column_names_str
-        throw(ErrorException(msg))
-    end
+    (length(ccs_column_names_str) < 1) && throw(ErrorException("Not enough CCS category columns"))
 
     ccs10_to_icd10           = Dict{DiagnosisClass, Set{DiagnosisClass}}()
     ccs10_to_ccs_description = Dict{DiagnosisClass, String}()
