@@ -77,10 +77,11 @@ function generate_ccs10_to_icd10(download_cache = ensure_downloaded_files())
 
             ccsdesccolname = ccscolname_to_ccsdesccolname.(ccscolname)
             ccs_description = row[Symbol(ccsdesccolname)] |> strip
+            ccs_description_string = convert(String, ccs_description)::String
             setindex_same_value!(
                 ccs10_to_ccs_description,
                 ccs_node,
-                ccs_description,
+                ccs_description_string,
             )
         end
     end
