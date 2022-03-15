@@ -5,7 +5,7 @@ DocMeta.setdocmeta!(DiagnosisClassification, :DocTestSetup, :(using DiagnosisCla
 
 makedocs(;
     modules=[DiagnosisClassification],
-    authors="Dilum Aluthge, Brown Center for Biomedical Informatics, contributors",
+    authors="Dilum Aluthge, Brown Center for Biomedical Informatics, and contributors",
     repo="https://github.com/JuliaHealth/DiagnosisClassification.jl/blob/{commit}{path}#{line}",
     sitename="DiagnosisClassification.jl",
     format=Documenter.HTML(;

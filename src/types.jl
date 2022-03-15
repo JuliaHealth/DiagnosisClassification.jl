@@ -1,4 +1,4 @@
-# struct DiagnosisClass
-#     system::String
-#     value::String
-# end
+struct DiagnosisClass
+    system::String
+    value::String
+end
