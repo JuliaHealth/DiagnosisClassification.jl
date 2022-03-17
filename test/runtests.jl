@@ -7,6 +7,7 @@ import CSV
     include("dict_utils.jl")
     include("download.jl")
     include("init.jl")
+    include("types.jl")
 
     @testset "convenience" begin
         include("convenience/icd9.jl")
