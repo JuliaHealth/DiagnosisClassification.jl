@@ -2,8 +2,8 @@ function generate_ccs9_to_icd9(download_cache = ensure_downloaded_files())
     ccs_filename = joinpath(download_cache, "ccs9.txt")
     ccs_filecontents = strip(read(ccs_filename, String)::String)
     elements = strip.(split(ccs_filecontents, "\n\n"))
-    ccs9_to_icd9            = Dict{DiagnosisClass, Set{DiagnosisClass}}()
-    ccs9_to_ccs_description = Dict{DiagnosisClass, String}()
+    ccs9_to_icd9            = Dict{Class, Set{Class}}()
+    ccs9_to_ccs_description = Dict{Class, String}()
     for element in elements
         if startswith(element, "Appendix A - ")
             continue
@@ -20,8 +20,8 @@ function generate_ccs9_to_icd9(download_cache = ensure_downloaded_files())
         ccs_node = construct_ccs9(ccs_value)
         icd_values = strip.(split(strip(replace(m[3], '\n' => ' ')), ' '))
         filter!(x -> !isempty(x), icd_values)
-        icd_nodes = DiagnosisClassification.construct_icd9.(icd_values)
-        icd_set = Set{DiagnosisClassification.DiagnosisClass}(icd_nodes)
+        icd_nodes = construct_icd9.(icd_values)
+        icd_set = Set{Class}(icd_nodes)
         setindex_no_overwrite!(
             ccs9_to_icd9,
             ccs_node,
@@ -59,8 +59,8 @@ function generate_ccs10_to_icd10(download_cache = ensure_downloaded_files())
     end
     (length(ccs_column_names_str) < 1) && throw(ErrorException("Not enough CCS category columns"))
 
-    ccs10_to_icd10           = Dict{DiagnosisClass, Set{DiagnosisClass}}()
-    ccs10_to_ccs_description = Dict{DiagnosisClass, String}()
+    ccs10_to_icd10           = Dict{Class, Set{Class}}()
+    ccs10_to_ccs_description = Dict{Class, String}()
     for row in ccs_file
         icd_value = remove_single_quotes(row[Symbol("'ICD-10-CM CODE'")])
         icd_node  = construct_icd10(icd_value)
@@ -71,7 +71,7 @@ function generate_ccs10_to_icd10(download_cache = ensure_downloaded_files())
             end
             ccs_node = construct_ccs10(ccs_value)
             if !haskey(ccs10_to_icd10, ccs_node)
-                ccs10_to_icd10[ccs_node] = Set{DiagnosisClass}()
+                ccs10_to_icd10[ccs_node] = Set{Class}()
             end
             push!(ccs10_to_icd10[ccs_node], icd_node)
 

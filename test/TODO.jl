@@ -1,5 +1,5 @@
 @testset "TODO: fix this code" begin
-    DiagnosisClass          = DiagnosisClassification.DiagnosisClass
+    Class                   = DiagnosisClassification.Class
     generate_ccs9_to_icd9   = DiagnosisClassification.generate_ccs9_to_icd9
     construct_icd9          = DiagnosisClassification.construct_icd9
     construct_ccs9          = DiagnosisClassification.construct_ccs9
@@ -11,8 +11,8 @@
         ccs9_to_icd9_struct     = generate_ccs9_to_icd9()
         ccs9_to_icd9            = ccs9_to_icd9_struct.ccs9_to_icd9
         ccs9_to_ccs_description = ccs9_to_icd9_struct.ccs9_to_ccs_description
-        @test ccs9_to_icd9            isa Dict{DiagnosisClass, Set{DiagnosisClass}};
-        @test ccs9_to_ccs_description isa Dict{DiagnosisClass, String};
+        @test ccs9_to_icd9            isa Dict{Class, Set{Class}};
+        @test ccs9_to_ccs_description isa Dict{Class, String};
         @test !isempty(ccs9_to_icd9);
         @test !isempty(ccs9_to_ccs_description);
         @test ccs9_to_ccs_description[construct_ccs9("1")] == "Tuberculosis"
@@ -25,8 +25,8 @@
         ccs10_to_icd10_struct    = generate_ccs10_to_icd10()
         ccs10_to_icd10           = ccs10_to_icd10_struct.ccs10_to_icd10
         ccs10_to_ccs_description = ccs10_to_icd10_struct.ccs10_to_ccs_description
-        @test ccs10_to_icd10           isa Dict{DiagnosisClass, Set{DiagnosisClass}};
-        @test ccs10_to_ccs_description isa Dict{DiagnosisClass, String};
+        @test ccs10_to_icd10           isa Dict{Class, Set{Class}};
+        @test ccs10_to_ccs_description isa Dict{Class, String};
         @test !isempty(ccs10_to_icd10);
         @test !isempty(ccs10_to_ccs_description);
         @test ccs10_to_ccs_description[construct_ccs10("INF001")] == "Tuberculosis"
